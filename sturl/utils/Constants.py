@@ -19,7 +19,7 @@ class Constants():
     ALREADY_CREATED = "This resource was already created"
     INVALID_REQUEST: str = "Invalid request"
 
-    country_dict = {
+    COUNTRIES = {
         "AF": "Afghanistan",
         "AL": "Albania",
         "DZ": "Algeria",
@@ -211,6 +211,58 @@ class Constants():
         "YE": "Yemen",
         "ZM": "Zambia",
         "ZW": "Zimbabwe"
+    }
+
+    MONTH_CHART_SCHEMA = {
+        "January": 0,
+        "February": 0,
+        "March": 0,
+        "April": 0,
+        "May": 0,
+        "June": 0,
+        "July": 0,
+        "August": 0,
+        "September": 0,
+        "October": 0,
+        "November": 0,
+        "December": 0
+    }
+
+    WEEK_CHART_SCHEMA = {
+        "Monday": 0,
+        "Tuesday": 0,
+        "Wednesday": 0,
+        "Thursday": 0,
+        "Friday": 0,
+        "Saturday": 0,
+        "Sunday": 0
+    }
+    DAY_CHART_SCHEMA = {
+        "00:00": 0,
+        "01:00": 0,
+        "02:00": 0,
+        "03:00": 0,
+        "04:00": 0,
+        "05:00": 0,
+        "06:00": 0,
+        "07:00": 0,
+        "08:00": 0,
+        "09:00": 0,
+        "10:00": 0,
+        "11:00": 0,
+        "12:00": 0,
+        "13:00": 0,
+        "14:00": 0,
+        "15:00": 0,
+        "16:00": 0,
+        "17:00": 0,
+        "18:00": 0,
+        "19:00": 0,
+        "20:00": 0,
+        "21:00": 0,
+        "22:00": 0,
+        "23:00": 0,
+        "24:00": 0
     }
 
     EMAIL = 'crylletinc@gmail.com'

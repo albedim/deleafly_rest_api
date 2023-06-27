@@ -14,14 +14,20 @@ from sturl.configuration.config import sql
 class View(sql.Model):
     __tablename__ = 'views'
     view_id: int = sql.Column(sql.Integer, primary_key=True)
-    ip_address: str = sql.Column(sql.String, nullable=True)
+    platform: str = sql.Column(sql.String(14), nullable=False)
+    url_id: int = sql.Column(sql.Integer, nullable=False)
+    ip_address: str = sql.Column(sql.String(40), nullable=True)
     country: str = sql.Column(sql.String(40), nullable=False)
+    created_at: int = sql.Column(sql.Integer, nullable=False)
     created_on: datetime.date = sql.Column(sql.Date, nullable=True)
 
-    def __init__(self, ip_address, country):
+    def __init__(self, platform, urlId, ip_address, country):
         self.ip_address = ip_address
+        self.url_id = urlId
         self.country = country
-        self.created_on = datetime.date.today()
+        self.created_at = datetime.datetime.now().time().hour
+        self.platform = platform
+        self.created_on = datetime.datetime.now().date()
 
     def toJson(self):
         return {

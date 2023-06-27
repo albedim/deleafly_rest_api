@@ -21,3 +21,23 @@ class UrlRepository():
         url: Url = Url(original_url, user_id, name, shorted_url)
         sql.session.add(url)
         sql.session.commit()
+
+    @classmethod
+    def getUrls(cls, userId):
+        urls: list[Url] = sql.session.query(Url).filter(Url.user_id == userId).all()
+        return urls
+
+    @classmethod
+    def getUrl(cls, urlId):
+        url = sql.session.query(Url).filter(Url.url_id == urlId).first()
+        return url
+
+    @classmethod
+    def getUrlByCode(cls, urlCode):
+        url = sql.session.query(Url).filter(Url.shorted_url == urlCode).first()
+        return url
+
+    @classmethod
+    def removeUrl(cls, urlId):
+        sql.session.query(Url).filter(Url.url_id == urlId).delete()
+        sql.session.commit()

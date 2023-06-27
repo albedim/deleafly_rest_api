@@ -1,12 +1,12 @@
 from flask_jwt_extended import JWTManager
 
 from sturl.configuration.config import app, sql
-from sturl.controller import UserController, UrlController
+from sturl.controller import UserController, UrlController, ViewController
 
 # controllers init
 app.register_blueprint(UrlController.url)
 app.register_blueprint(UserController.user)
-
+app.register_blueprint(ViewController.view)
 # modules init
 JWTManager(app)
 
