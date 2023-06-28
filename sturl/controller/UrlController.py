@@ -8,6 +8,13 @@ from sturl.utils.Utils import Utils
 url: Blueprint = Blueprint('UrlController', __name__, url_prefix=Utils.getURL('url'))
 
 
+@url.route("/change/<urlId>", methods=['PUT'])
+@cross_origin()
+@jwt_required()
+def update(urlId):
+    return UrlService.update(get_jwt_identity(), urlId, request.args.get("name"))
+
+
 @url.route("/get/of/<userId>", methods=['GET'])
 @cross_origin()
 def getUrls(userId):

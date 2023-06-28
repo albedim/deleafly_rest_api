@@ -18,14 +18,14 @@ class View(sql.Model):
     url_id: int = sql.Column(sql.Integer, nullable=False)
     ip_address: str = sql.Column(sql.String(40), nullable=True)
     country: str = sql.Column(sql.String(40), nullable=False)
-    created_at: int = sql.Column(sql.Integer, nullable=False)
+    created_at: str = sql.Column(sql.String(5), nullable=False)
     created_on: datetime.date = sql.Column(sql.Date, nullable=True)
 
     def __init__(self, platform, urlId, ip_address, country):
         self.ip_address = ip_address
         self.url_id = urlId
         self.country = country
-        self.created_at = datetime.datetime.now().time().hour
+        self.created_at = str(datetime.datetime.now().time().hour) + ":00"
         self.platform = platform
         self.created_on = datetime.datetime.now().date()
 

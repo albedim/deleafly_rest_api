@@ -8,6 +8,12 @@ from sturl.utils.Utils import Utils
 view: Blueprint = Blueprint('ViewController', __name__, url_prefix=Utils.getURL('view'))
 
 
+@view.route("/create", methods=['POST'])
+@cross_origin()
+def create():
+    return ViewService.add(request.json)
+
+
 @view.route("/get/<urlId>", methods=['GET'])
 @cross_origin()
 def getDailyView(urlId):

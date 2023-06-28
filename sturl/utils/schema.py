@@ -22,5 +22,14 @@ SCHEMA = [
             "user_id": int,
             "password": str
         }
-    }
+    },
+    {
+        "name": "VIEW_CREATE",
+        "schema": {
+            "platform": str,
+            "url_code": str,
+            "ipv4": str,
+            "country_code": str
+        }
+    },
 ]

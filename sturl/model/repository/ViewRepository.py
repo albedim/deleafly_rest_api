@@ -55,16 +55,10 @@ class ViewRepository():
         return views
 
     @classmethod
-    def getAllByCountry(cls, urlId):
-        views = sql.session.query(text('counter'), View.country).from_statement(
-            text("SELECT "
-                 "COUNT(*) AS counter, country "
-                 "FROM views "
-                 "WHERE url_id = :urlId " 
-                 "GROUP BY "
-                 "country").params(urlId = urlId)
-        ).all()
-        return views
+    def create(cls, urlId, platform, ipv4, countryCode):
+        view = View(platform, urlId, ipv4, countryCode)
+        sql.session.add(view)
+        sql.session.commit()
 
     @classmethod
     def getDailyByCountry(cls, urlId):

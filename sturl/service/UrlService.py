@@ -40,3 +40,13 @@ class UrlService():
         UrlRepository.removeUrl(urlId)
         return cls.getUrls(userId)
 
+    @classmethod
+    def update(cls, user, urlId, newName):
+        url = UrlRepository.getUrl(urlId)
+        if url is None:
+            return Utils.createWrongResponse(False, Constants.NOT_FOUND, 404), 404
+        if user['user_id'] != url.user_id:
+            return Utils.createWrongResponse(False, Constants.NOT_ENOUGH_PERMISSIONS, 403), 403
+        UrlRepository.update(url, newName)
+        return cls.getUrls(url.user_id)
+

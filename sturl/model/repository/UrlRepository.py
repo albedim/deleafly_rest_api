@@ -41,3 +41,8 @@ class UrlRepository():
     def removeUrl(cls, urlId):
         sql.session.query(Url).filter(Url.url_id == urlId).delete()
         sql.session.commit()
+
+    @classmethod
+    def update(cls, url, newName):
+        url.name = newName
+        sql.session.commit()
