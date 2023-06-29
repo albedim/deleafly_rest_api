@@ -136,3 +136,8 @@ class ViewRepository():
                  "platform").params(urlId=urlId)
         ).all()
         return views
+
+    @classmethod
+    def removeViews(cls, urlId):
+        sql.session.query(View).filter(View.url_id == urlId).delete()
+        sql.session.commit()

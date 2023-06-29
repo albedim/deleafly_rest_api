@@ -88,3 +88,8 @@ class ViewService():
             request['country_code']
         )
         return Utils.createSuccessResponse(True, url.toJson())
+
+    @classmethod
+    def removeViews(cls, urlId):
+        ViewRepository.removeViews(urlId)
+        return Utils.createSuccessResponse(True, Constants.CREATED)

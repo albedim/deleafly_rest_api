@@ -4,6 +4,7 @@ from flask_jwt_extended import create_access_token
 from sturl.model.entity.User import User
 from sturl.model.repository.UrlRepository import UrlRepository
 from sturl.model.repository.UserRepository import UserRepository
+from sturl.service.ViewService import ViewService
 from sturl.utils.Constants import Constants
 from sturl.utils.Utils import Utils
 
@@ -55,6 +56,7 @@ class UrlService():
     def removeUrl(cls, urlId):
         userId = UrlRepository.getUrl(urlId).user_id
         UrlRepository.removeUrl(urlId)
+        ViewService.removeViews(urlId)
         return cls.getUrls(userId)
 
     @classmethod
