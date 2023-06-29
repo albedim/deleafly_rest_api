@@ -45,3 +45,9 @@ def sync():
     return UserService.sync(get_jwt_identity())
 
 
+@user.route("/change/<userId>", methods=['PUT'])
+@cross_origin()
+def change(userId):
+    return UserService.change(userId, request.json)
+
+

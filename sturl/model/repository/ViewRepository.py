@@ -16,6 +16,7 @@ from sturl.model.entity.View import View
 #
 
 class ViewRepository():
+
     @classmethod
     def getDaily(cls, urlId):
         views = sql.session.query(text('counter'), View.created_at).from_statement(

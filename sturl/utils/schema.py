@@ -32,4 +32,20 @@ SCHEMA = [
             "country_code": str
         }
     },
+    {
+        "name": "URL_CREATE",
+        "schema": {
+            "user_id": int,
+            "name": str,
+            "original_url": str
+        }
+    },
+    {
+        "name": "CHANGE",
+        "schema": {
+            "complete_name": str,
+            "new_password": str,
+            "email": str
+        }
+    },
 ]

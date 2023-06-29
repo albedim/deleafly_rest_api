@@ -32,3 +32,9 @@ def getUrlByCode(shortedUrl):
 @cross_origin()
 def removeUrl(urlId):
     return UrlService.removeUrl(urlId)
+
+
+@url.route("/create", methods=['POST'])
+@cross_origin()
+def create():
+    return UrlService.create(request.json)

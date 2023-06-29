@@ -13,6 +13,7 @@ class Constants():
     USER_NOT_FOUND: str = "This user was not found"
     NOT_FOUND: str = "Not found"
     NOT_ENOUGH_PERMISSIONS: str = "Not enough permissions"
+    MAX_URLS_REACHED = "You can't create more urls"
     CREATED: str = "Created"
     UP_TO_DATE: str = "Up To date"
     NOT_UP_TO_DATE: str = "Not Up To date"
@@ -261,8 +262,7 @@ class Constants():
         "20:00": 0,
         "21:00": 0,
         "22:00": 0,
-        "23:00": 0,
-        "24:00": 0
+        "23:00": 0
     }
 
     EMAIL = 'crylletinc@gmail.com'

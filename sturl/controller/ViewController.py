@@ -16,5 +16,5 @@ def create():
 
 @view.route("/get/<urlId>", methods=['GET'])
 @cross_origin()
-def getDailyView(urlId):
+def getViews(urlId):
     return ViewService.get(urlId, request.args.get("mode"))

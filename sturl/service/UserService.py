@@ -93,6 +93,19 @@ class UserService():
         return Utils.createSuccessResponse(True, Constants.CREATED)
 
     @classmethod
+    def change(cls, userId, request) -> tuple[Any, int] | dict:
+        if not Utils.isValid(request, "CHANGE"):
+            return Utils.createWrongResponse(False, Constants.INVALID_REQUEST, 415), 415
+        if request['new_password'] != '':
+            UserRepository.changePassword(userId, Utils.hash(request['new_password']))
+        UserRepository.changeName(userId, request['complete_name'])
+        return Utils.createSuccessResponse(True, {
+                "token": create_access_token(
+                    identity=UserRepository.getUserById(userId).toJson(),
+                    expires_delta=timedelta(weeks=4))
+            })
+
+    @classmethod
     def sync(cls, requestUser):
         user = cls.getUserById(requestUser['user_id'])
         if user == requestUser:

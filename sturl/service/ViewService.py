@@ -1,5 +1,9 @@
+import ast
+import json
 from datetime import timedelta
 from typing import Any
+
+from flask import jsonify
 from flask_jwt_extended import create_access_token
 from sturl.model.entity.User import User
 from sturl.model.repository.UrlRepository import UrlRepository
@@ -12,7 +16,7 @@ class ViewService():
 
     @classmethod
     def get(cls, urlId, mode):
-        obj = { }
+        obj = {}
         viewsLabel = 0
         platformLabels = []
         platformValues = []
@@ -33,9 +37,11 @@ class ViewService():
             platforms = ViewRepository.getMonthlyByPlatform(urlId)
             countries = ViewRepository.getWeeklyByCountry(urlId)
             obj = Constants.WEEK_CHART_SCHEMA.copy()
+            print(obj)
             for view in views:
                 obj[str(view[1])] = view[0]
                 viewsLabel += view[0]
+            print(obj)
         elif mode == 'monthly':
             views = ViewRepository.getMonthly(urlId)
             platforms = ViewRepository.getMonthlyByPlatform(urlId)
@@ -44,6 +50,8 @@ class ViewService():
             for view in views:
                 obj[str(view[1])] = view[0]
                 viewsLabel += view[0]
+        else:
+            return Utils.createWrongResponse(False, Constants.INVALID_REQUEST, 415), 415
         """ countries handler """
         for country in countries:
             countryLabels.append(Constants.COUNTRIES[country[1]])
@@ -52,20 +60,20 @@ class ViewService():
         for platform in platforms:
             platformLabels.append(platform[1])
             platformValues.append(platform[0])
-        print(countries)
+        
         return Utils.createSuccessResponse(True, {
-            'views_chart': {
-                'label': viewsLabel,
-                'value': obj
-            },
-            'countries_chart': {
-                'labels': countryLabels,
-                'values': countryValues
-            },
-            'platforms_chart': {
-                'labels': platformLabels,
-                'values': platformValues
-            }
+               'views_chart': {
+                   'label': viewsLabel,
+                   'value': obj
+               },
+               'countries_chart': {
+                   'labels': countryLabels,
+                   'values': countryValues
+               },
+               'platforms_chart': {
+                   'labels': platformLabels,
+                   'values': platformValues
+               }
         })
 
     @classmethod

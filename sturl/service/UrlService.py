@@ -3,6 +3,7 @@ from typing import Any
 from flask_jwt_extended import create_access_token
 from sturl.model.entity.User import User
 from sturl.model.repository.UrlRepository import UrlRepository
+from sturl.model.repository.UserRepository import UserRepository
 from sturl.utils.Constants import Constants
 from sturl.utils.Utils import Utils
 
@@ -17,6 +18,22 @@ class UrlService():
             f"{user.complete_name.split(' ')[0]}'s First url",
             Utils.createLink(8)
         )
+
+    @classmethod
+    def create(cls, request):
+        if not Utils.isValid(request, "URL_CREATE"):
+            return Utils.createWrongResponse(False, Constants.INVALID_REQUEST, 415), 415
+        if UserRepository.getUserById(request['user_id']) is None:
+            return Utils.createWrongResponse(False, Constants.NOT_FOUND, 404), 404
+        if len(UrlRepository.getUrls(request['user_id'])) == 5:
+            return Utils.createWrongResponse(False, Constants.MAX_URLS_REACHED, 403), 403
+        UrlRepository.create(
+            request['original_url'],
+            request['user_id'],
+            request['name'],
+            Utils.createLink(8)
+        )
+        return cls.getUrls(request['user_id'])
 
     @classmethod
     def getUrls(cls, userId):

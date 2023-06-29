@@ -58,3 +58,10 @@ class UserRepository():
         user: User = cls.getUserById(userId)
         user.password = password
         sql.session.commit()
+
+    @classmethod
+    def changeName(cls, userId, name) -> User:
+        user: User = cls.getUserById(userId)
+        user.complete_name = name
+        sql.session.commit()
+
