@@ -2,8 +2,8 @@ import datetime
 
 from sqlalchemy.sql.elements import or_
 
-from sturl.configuration.config import sql
-from sturl.model.entity.Url import Url
+from deleafly.configuration.config import sql
+from deleafly.model.entity.Url import Url
 
 
 #

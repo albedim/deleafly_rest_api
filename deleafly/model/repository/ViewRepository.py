@@ -3,8 +3,8 @@ import datetime
 from sqlalchemy import text
 from sqlalchemy.sql.elements import or_
 
-from sturl.configuration.config import sql
-from sturl.model.entity.View import View
+from deleafly.configuration.config import sql
+from deleafly.model.entity.View import View
 
 
 #

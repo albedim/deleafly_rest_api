@@ -1,11 +1,11 @@
 from datetime import timedelta
 from typing import Any
 from flask_jwt_extended import create_access_token
-from sturl.model.entity.User import User
-from sturl.model.repository.UserRepository import UserRepository
-from sturl.service.UrlService import UrlService
-from sturl.utils.Constants import Constants
-from sturl.utils.Utils import Utils
+from deleafly.model.entity.User import User
+from deleafly.model.repository.UserRepository import UserRepository
+from deleafly.service.UrlService import UrlService
+from deleafly.utils.Constants import Constants
+from deleafly.utils.Utils import Utils
 
 
 #

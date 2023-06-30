@@ -1,6 +1,6 @@
 config = {
   "host": "localhost",
   "username": "root",
-  "db-name": "sturl",
+  "db-name": "deleafly",
   "password": ""
 }

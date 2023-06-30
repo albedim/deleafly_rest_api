@@ -7,9 +7,9 @@ import smtplib
 from email.message import EmailMessage
 from flask import jsonify
 
-from sturl.utils.Constants import Constants
+from deleafly.utils.Constants import Constants
 from resources.rest_service import config
-from sturl.utils.schema import SCHEMA
+from deleafly.utils.schema import SCHEMA
 
 
 class Utils():

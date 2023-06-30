@@ -1,8 +1,8 @@
 from flask import Blueprint, request
 from flask_jwt_extended import jwt_required, get_jwt_identity
 from flask_cors import cross_origin
-from sturl.service.ViewService import ViewService
-from sturl.utils.Utils import Utils
+from deleafly.service.ViewService import ViewService
+from deleafly.utils.Utils import Utils
 
 
 view: Blueprint = Blueprint('ViewController', __name__, url_prefix=Utils.getURL('view'))

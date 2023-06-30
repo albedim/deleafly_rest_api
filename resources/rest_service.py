@@ -1,5 +1,5 @@
 config = {
-  "name": "Sturl",
+  "name": "Deleafly",
   "author": "albedim",
   "version": "1.1.5",
   "history-versions": [

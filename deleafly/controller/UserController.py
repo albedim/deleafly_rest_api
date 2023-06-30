@@ -1,8 +1,8 @@
 from flask import Blueprint, request
 from flask_jwt_extended import jwt_required, get_jwt_identity
 from flask_cors import cross_origin
-from sturl.service.UserService import UserService
-from sturl.utils.Utils import Utils
+from deleafly.service.UserService import UserService
+from deleafly.utils.Utils import Utils
 
 
 user: Blueprint = Blueprint('UserController', __name__, url_prefix=Utils.getURL('user'))

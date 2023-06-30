@@ -1,5 +1,5 @@
 import datetime
-from sturl.configuration.config import sql
+from deleafly.configuration.config import sql
 
 
 #
