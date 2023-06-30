@@ -40,7 +40,7 @@ class UrlService():
     def getUrls(cls, userId):
         return Utils.createSuccessResponse(True, {
             'max_urls': 5,
-            'urls': Utils.createList(UrlRepository.getUrls(userId))
+            'urls': Utils.createListOfPages(Utils.createList(UrlRepository.getUrls(userId)), 3)
         })
 
     @classmethod

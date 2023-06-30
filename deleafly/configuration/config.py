@@ -1,8 +1,8 @@
 from flask import Flask
 # from flask_apscheduler import APScheduler
 from flask_sqlalchemy import SQLAlchemy
-from sturl.utils.Constants import Constants
-from sturl.utils.Utils import Utils
+from deleafly.utils.Constants import Constants
+from deleafly.utils.Utils import Utils
 from resources.config import config
 
 # modules init

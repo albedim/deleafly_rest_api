@@ -1,7 +1,7 @@
 from flask_jwt_extended import JWTManager
 
-from sturl.configuration.config import app, sql
-from sturl.controller import UserController, UrlController, ViewController
+from deleafly.configuration.config import app, sql
+from deleafly.controller import UserController, UrlController, ViewController
 
 # controllers init
 app.register_blueprint(UrlController.url)
