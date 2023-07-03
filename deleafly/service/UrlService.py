@@ -34,10 +34,17 @@ class UrlService():
             request['name'],
             Utils.createLink(8)
         )
-        return cls.getUrls(request['user_id'])
+        return cls.__getUrlsByUserId(request['user_id'])
 
     @classmethod
-    def getUrls(cls, userId):
+    def getUrls(cls, user):
+        return Utils.createSuccessResponse(True, {
+            'max_urls': 5,
+            'urls': Utils.createListOfPages(Utils.createList(UrlRepository.getUrls(user['user_id'])), 3)
+        })
+
+    @classmethod
+    def __getUrlsByUserId(cls, userId):
         return Utils.createSuccessResponse(True, {
             'max_urls': 5,
             'urls': Utils.createListOfPages(Utils.createList(UrlRepository.getUrls(userId)), 3)
@@ -57,7 +64,7 @@ class UrlService():
         userId = UrlRepository.getUrl(urlId).user_id
         UrlRepository.removeUrl(urlId)
         ViewService.removeViews(urlId)
-        return cls.getUrls(userId)
+        return cls.__getUrlsByUserId(userId)
 
     @classmethod
     def update(cls, user, urlId, newName):
@@ -67,5 +74,4 @@ class UrlService():
         if user['user_id'] != url.user_id:
             return Utils.createWrongResponse(False, Constants.NOT_ENOUGH_PERMISSIONS, 403), 403
         UrlRepository.update(url, newName)
-        return cls.getUrls(url.user_id)
-
+        return cls.__getUrlsByUserId(url.user_id)

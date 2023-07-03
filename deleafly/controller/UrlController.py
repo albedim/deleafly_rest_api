@@ -15,10 +15,11 @@ def update(urlId):
     return UrlService.update(get_jwt_identity(), urlId, request.args.get("name"))
 
 
-@url.route("/get/of/<userId>", methods=['GET'])
+@url.route("/get/of", methods=['GET'])
 @cross_origin()
-def getUrls(userId):
-    return UrlService.getUrls(userId)
+@jwt_required()
+def getUrls():
+    return UrlService.getUrls(get_jwt_identity())
 
 
 @url.route("/get/<shortedUrl>", methods=['GET'])

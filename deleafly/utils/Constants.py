@@ -1,3 +1,6 @@
+import calendar
+from datetime import datetime
+
 
 #
 # @author: Alberto Di Maio, albedim <dimaio.albe@gmail.com>
@@ -8,7 +11,6 @@
 #
 
 class Constants():
-
     LANGUAGE_NOT_FOUND: str = "This language was not found"
     USER_NOT_FOUND: str = "This user was not found"
     NOT_FOUND: str = "Not found"
@@ -214,7 +216,7 @@ class Constants():
         "ZW": "Zimbabwe"
     }
 
-    MONTH_CHART_SCHEMA = {
+    YEARLY_CHART_SCHEMA = {
         "January": 0,
         "February": 0,
         "March": 0,
@@ -228,6 +230,19 @@ class Constants():
         "November": 0,
         "December": 0
     }
+
+    @classmethod
+    def MONTHLY_CHART_SCHEMA(cls):
+        current_year = datetime.now().year
+        current_month = datetime.now().month
+        num_days = calendar.monthrange(current_year, current_month)[1]
+        obj = {}
+        i = 1
+        while i < num_days:
+            if i > 0:
+                obj[str(i)+"/"+str(current_month) if i > 9 else "0"+str(i)+"/"+str(current_month)] = 0
+            i += 1
+        return obj
 
     WEEK_CHART_SCHEMA = {
         "Monday": 0,

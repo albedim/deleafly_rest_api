@@ -38,12 +38,25 @@ class ViewRepository():
                  "FROM views "
                  "WHERE YEARWEEK(created_on, 1) = YEARWEEK(CURDATE(), 1) "
                  "AND url_id = :urlId "
-                 "GROUP BY created_on").params(urlId=urlId)
+                 "GROUP BY DAY(created_on)").params(urlId=urlId)
         ).all()
         return views
 
     @classmethod
     def getMonthly(cls, urlId):
+        views = sql.session.query(text('counter'), View.created_on).from_statement(
+            text("SELECT "
+                 "COUNT(*) AS counter, "
+                 "DAY(created_on)"
+                 "FROM views "
+                 "WHERE MONTH(created_on) = MONTH(CURRENT_DATE()) AND YEAR(created_on) = YEAR(CURRENT_DATE()) "
+                 "AND url_id = :urlId "
+                 "GROUP BY DAY(created_on)").params(urlId=urlId)
+        ).all()
+        return views
+
+    @classmethod
+    def getYearly(cls, urlId):
         views = sql.session.query(text('counter'), View.created_on).from_statement(
             text("SELECT "
                  "COUNT(*) AS counter, MONTHNAME(created_on) "
@@ -90,6 +103,19 @@ class ViewRepository():
     def getMonthlyByCountry(cls, urlId):
         views = sql.session.query(text('counter'), View.country).from_statement(
             text("SELECT "
+                 "COUNT(*) AS counter, "
+                 "country "
+                 "FROM views "
+                 "WHERE MONTH(created_on) = MONTH(CURRENT_DATE()) AND YEAR(created_on) = YEAR(CURRENT_DATE()) "
+                 "AND url_id = :urlId "
+                 "GROUP BY country").params(urlId=urlId)
+        ).all()
+        return views
+
+    @classmethod
+    def getYearlyByCountry(cls, urlId):
+        views = sql.session.query(text('counter'), View.country).from_statement(
+            text("SELECT "
                  "COUNT(*) AS counter, country "
                  "FROM views "
                  "WHERE DATE_SUB(NOW(), INTERVAL 1 MONTH) "
@@ -128,6 +154,19 @@ class ViewRepository():
     def getMonthlyByPlatform(cls, urlId):
         views = sql.session.query(text('counter'), View.platform).from_statement(
             text("SELECT "
+                 "COUNT(*) AS counter, "
+                 "platform "
+                 "FROM views "
+                 "WHERE MONTH(created_on) = MONTH(CURRENT_DATE()) AND YEAR(created_on) = YEAR(CURRENT_DATE()) "
+                 "AND url_id = :urlId "
+                 "GROUP BY platform").params(urlId=urlId)
+        ).all()
+        return views
+
+    @classmethod
+    def getYearlyByPlatform(cls, urlId):
+        views = sql.session.query(text('counter'), View.platform).from_statement(
+            text("SELECT "
                  "COUNT(*) AS counter, platform "
                  "FROM views "
                  "WHERE DATE_SUB(NOW(), INTERVAL 1 MONTH) "
@@ -141,3 +180,51 @@ class ViewRepository():
     def removeViews(cls, urlId):
         sql.session.query(View).filter(View.url_id == urlId).delete()
         sql.session.commit()
+
+    @classmethod
+    def getDailyReviews(cls, urlId):
+        views = sql.session.query(text('counter')).from_statement(
+            text("SELECT "
+                 "COUNT(*) AS counter "
+                 "FROM views "
+                 "WHERE created_on = CURDATE() "
+                 "AND url_id = :urlId "
+                 "GROUP BY ip_address").params(urlId=urlId)
+        ).all()
+        return views
+
+    @classmethod
+    def getWeeklyReviews(cls, urlId):
+        views = sql.session.query(text('counter')).from_statement(
+            text("SELECT "
+                 "COUNT(*) AS counter "
+                 "FROM views "
+                 "WHERE YEARWEEK(created_on, 1) = YEARWEEK(CURDATE(), 1) "
+                 "AND url_id = :urlId "
+                 "GROUP BY ip_address").params(urlId=urlId)
+        ).all()
+        return views
+
+    @classmethod
+    def getMonthlyReviews(cls, urlId):
+        views = sql.session.query(text('counter')).from_statement(
+            text("SELECT "
+                 "COUNT(*) AS counter "
+                 "FROM views "
+                 "WHERE MONTH(created_on) = MONTH(CURRENT_DATE()) AND YEAR(created_on) = YEAR(CURRENT_DATE()) "
+                 "AND url_id = :urlId "
+                 "GROUP BY ip_address").params(urlId=urlId)
+        ).all()
+        return views
+
+    @classmethod
+    def getYearlyReviews(cls, urlId):
+        views = sql.session.query(text('counter')).from_statement(
+            text("SELECT "
+                 "COUNT(*) AS counter "
+                 "FROM views "
+                 "WHERE DATE_SUB(NOW(), INTERVAL 1 MONTH) "
+                 "AND url_id = :urlId "
+                 "GROUP BY ip_address").params(urlId=urlId)
+        ).all()
+        return views
