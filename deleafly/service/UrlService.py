@@ -14,7 +14,7 @@ class UrlService():
     @classmethod
     def createFirst(cls, original_url, user):
         UrlRepository.create(
-            original_url,
+            cls.removeProtocolAndWww(original_url),
             user.user_id,
             f"{user.complete_name.split(' ')[0]}'s First url",
             Utils.createLink(8)
@@ -29,7 +29,7 @@ class UrlService():
         if len(UrlRepository.getUrls(request['user_id'])) == 5:
             return Utils.createWrongResponse(False, Constants.MAX_URLS_REACHED, 403), 403
         UrlRepository.create(
-            request['original_url'],
+            cls.removeProtocolAndWww(request['original_url']),
             request['user_id'],
             request['name'],
             Utils.createLink(8)
@@ -75,3 +75,15 @@ class UrlService():
             return Utils.createWrongResponse(False, Constants.NOT_ENOUGH_PERMISSIONS, 403), 403
         UrlRepository.update(url, newName)
         return cls.__getUrlsByUserId(url.user_id)
+
+    @classmethod
+    def removeProtocolAndWww(cls, url):
+        if url.startswith("https://"):
+            url = url[8:]
+        elif url.startswith("http://"):
+            url = url[7:]
+
+        if url.startswith("www."):
+            url = url[4:]
+
+        return url
