@@ -281,7 +281,7 @@ class Constants():
     }
 
     EMAIL = 'crylletinc@gmail.com'
-    PASSWORD = 'hlvvqpdubniuobbe'
+    PASSWORD = ''
     PASSWORD_FORGOTTEN_EMAIL: str = "Hey! \nHere's the link to recover your account: https://cryllet-fe.pages.dev/create_password/{token}"
 
     PAGE_NOT_FOUND = 'This page was not found. See our documentation'
